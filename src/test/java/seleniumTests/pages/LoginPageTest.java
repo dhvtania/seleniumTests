@@ -29,7 +29,7 @@ public class LoginPageTest extends LoginPageTestBase  {
     @Test
     public void registrationWithWrongNickName() throws InterruptedException {
         //click "Вход" button
-
+        clickLogin();
 
         //sent wrongRegExpNickName captcha is dysplayed
         enterNickName(wrongRegExpNickName);

@@ -12,10 +12,10 @@ import org.testng.annotations.Test;
 public class LoginPageTest extends LoginPageTestBase  {
     MainPage mainPage;
     LoginPage loginPage;
-    private final CharSequence wrongRegExpNickName = "ab";
+    private final CharSequence wrongRegExpNickNameShort = "ab";
     private final CharSequence password = "test";
     private final CharSequence unusedNickName = "unusedNickName";
-    private final CharSequence wrongAginPassword = "t";
+    private final CharSequence wrongAgainPassword = "t";
 
     @BeforeClass
     public void testInit() {
@@ -32,7 +32,7 @@ public class LoginPageTest extends LoginPageTestBase  {
         clickLogin();
 
         //sent wrongRegExpNickName captcha is dysplayed
-        enterNickName(wrongRegExpNickName);
+        enterNickName(wrongRegExpNickNameShort);
 
         //check that loginInfo is dysplayed
         wait.until(ExpectedConditions.visibilityOf(loginPage.getLoginInfo()));
@@ -70,13 +70,28 @@ public class LoginPageTest extends LoginPageTestBase  {
         Assert.assertEquals("Wrong LoginInfoText","Приятно видеть новых людей!\n" +
                 "Этот никнейм еще не занят.",loginPage.getLoginInfo().getText());
         enterPassword(password);
-        enterPasswordAgain(wrongAginPassword);
+        enterPasswordAgain(wrongAgainPassword);
         Assert.assertEquals("Wrong password again color", "rgba(255, 28, 8, 0.317647)", loginPage.getPasswordAgain().getCssValue("background-color"));
         Assert.assertFalse("Registration button should be disabled",loginPage.getSubmitButton().isEnabled());
         RefreshPage();
 
 
     }
+
+    @Test
+    public void RregistrationWithWrongNickNameAndPassword(){
+        clickLogin();
+        enterNickName(wrongRegExpNickNameShort);
+        wait.until(ExpectedConditions.visibilityOf(loginPage.getLoginInfo()));
+        Assert.assertEquals("Wrong LoginInfoText","Никнейм должен удовлетворять регэкспу: \\w{3,15}",loginPage.getLoginInfo().getText());
+        enterPassword(wrongAgainPassword);
+        enterPasswordAgain(wrongAgainPassword);
+        Assert.assertEquals("Wrong password again color", "rgba(255, 28, 8, 0.317647)", loginPage.getPasswordAgain().getCssValue("background-color"));
+        Assert.assertFalse("Registration button should be disabled",loginPage.getSubmitButton().isEnabled());
+        RefreshPage();
+    }
+
+
 
     private void clickLogin() {
         mainPage.getLoginButton().click();
@@ -93,9 +108,9 @@ public class LoginPageTest extends LoginPageTestBase  {
         loginPage.getPassword().sendKeys(password);
     }
 
-    private void enterNickName(CharSequence wrongRegExpNickName) {
+    private void enterNickName(CharSequence nickName) {
         loginPage.getNickName().click();
-        loginPage.getNickName().sendKeys(wrongRegExpNickName);
+        loginPage.getNickName().sendKeys(nickName);
     }
 
 

@@ -41,7 +41,7 @@ public class TestBase {
         }
     }
 
-    protected void RefreshPage(){
+    protected void refreshPage(){
         webDriver.navigate().refresh();
     }
 }

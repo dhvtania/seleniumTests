@@ -1,10 +1,13 @@
 package seleniumTests.pages;
 
 import junit.framework.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import java.util.Set;
 
 /**
  * Created by MikhailN on 06.01.14.
@@ -17,6 +20,7 @@ public class LoginPageTest extends LoginPageTestBase  {
     private final CharSequence password = "test";
     private final CharSequence unusedNickName = "unusedNickName";
     private final CharSequence wrongPasswordAgain = "t";
+    private final CharSequence captcha = "FG4h";
 
     @BeforeClass
     public void testInit() {
@@ -40,10 +44,13 @@ public class LoginPageTest extends LoginPageTestBase  {
 
         enterCorrectAgainPassword(password);
 
+        //enterCaptcha(captcha);
+
         //check that registration button is disaibled
         Assert.assertFalse("Registration button should be disabled",loginPage.getSubmitButton().isEnabled());
 
         refreshPage();
+
     }
 
     @Test
@@ -55,6 +62,8 @@ public class LoginPageTest extends LoginPageTestBase  {
         enterPassword(password);
         
         enterWrongPasswordAgain(wrongPasswordAgain);
+
+        //enterCaptcha(captcha);
 
         Assert.assertFalse("Registration button should be disabled",loginPage.getSubmitButton().isEnabled());
 
@@ -70,6 +79,8 @@ public class LoginPageTest extends LoginPageTestBase  {
         enterPassword(password);
 
         enterWrongPasswordAgain(wrongPasswordAgain);
+
+        //enterCaptcha(captcha);
 
         Assert.assertFalse("Registration button should be disabled",loginPage.getSubmitButton().isEnabled());
 
@@ -89,6 +100,8 @@ public class LoginPageTest extends LoginPageTestBase  {
         //sent password to the againPassword field
         enterCorrectAgainPassword(password);
 
+        //enterCaptcha(captcha);
+
         //check that registration button is disaibled
         Assert.assertFalse("Registration button should be disabled",loginPage.getSubmitButton().isEnabled());
 
@@ -99,6 +112,8 @@ public class LoginPageTest extends LoginPageTestBase  {
         enterPassword(password);
 
         enterWrongPasswordAgain(wrongPasswordAgain);
+
+        //enterCaptcha(captcha);
 
         Assert.assertFalse("Registration button should be disabled", loginPage.getSubmitButton().isEnabled());
 
@@ -119,12 +134,42 @@ public class LoginPageTest extends LoginPageTestBase  {
 
         enterWrongPasswordAgain(wrongPasswordAgain);
 
+        //enterCaptcha(captcha);
+
         Assert.assertFalse("Registration button should be disabled",loginPage.getSubmitButton().isEnabled());
 
         refreshPage();
     }
 
 
+    @Test(enabled = false) //test is ignored until captcha is not permanent
+    public void registrationWithoutErrors(){
+        Assert.assertEquals("Wrong button text", "Вход", mainPage.getLoginButton().getText());
+        clickLogin();
+        enterCorrectUnusedNickName(unusedNickName);
+        enterPassword(password);
+        enterCorrectAgainPassword(password);
+        //enterCaptcha();
+        Assert.assertTrue("Registration button should be disabled",loginPage.getSubmitButton().isEnabled());
+        loginPage.getSubmitButton().click();
+        Assert.assertTrue("User panel is not dysplayed", mainPage.getUserPanel().isDisplayed());
+        Assert.assertEquals("Wrong nickname on user panel", unusedNickName, mainPage.getProfileLink().getText());
+        Assert.assertTrue("Exit is not dysplayed", mainPage.getExit().isDisplayed());
+    }
+
+    @Test(enabled = false) //test is ignored until captcha is not permanent
+    public void registrationUsingGoogleAccount() throws InterruptedException {
+        Set <String> a;
+        clickLogin();
+        WebElement iframe = webDriver.findElement(By.cssSelector("iframe[id*='easyXDM_default']"));
+        webDriver.switchTo().frame(iframe);
+        webDriver.findElement(By.cssSelector("#google")).click();
+        a = webDriver.getWindowHandles();
+        Thread.sleep(1000);
+
+    }
+
+      
     private void clickLogin() {
         mainPage.getLoginButton().click();
         Assert.assertTrue(mainPage.getLoginForm().isDisplayed());
@@ -199,6 +244,10 @@ public class LoginPageTest extends LoginPageTestBase  {
         loginPage.getPassword().clear();
         loginPage.getPasswordAgain().clear();
         //loginPage.getLoginCaptcha().clear();
+    }
+
+    private void enterCaptcha(CharSequence captcha) {
+        loginPage.getCaptchaInputField().sendKeys(captcha);
     }
 
 

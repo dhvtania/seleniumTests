@@ -21,7 +21,7 @@ public class LoginPageSocialButtonsAuthenticationTest extends LoginPageTestBase 
         googleAuthenticationPage = PageFactory.initElements(webDriver, GoogleAuthenticationPage.class);
     }
 
-    @Test(enabled = true) //test is ignored until captcha is not permanent
+    @Test(enabled = true)
     public void registrationWithClosingAuthenticationFormUsingGoogleAccount() throws InterruptedException {
         clickLogin();
 
@@ -45,7 +45,7 @@ public class LoginPageSocialButtonsAuthenticationTest extends LoginPageTestBase 
 
 
 
-    @Test(enabled = true) //test is ignored until captcha is not permanent
+    @Test(enabled = true)
     public void registrationWithCancelOnSiteUsingGoogleAccount() throws InterruptedException {
         clickLogin();
 
@@ -86,5 +86,46 @@ public class LoginPageSocialButtonsAuthenticationTest extends LoginPageTestBase 
         loginPage.getCloseButton().click();
         Assert.assertEquals("Вход", mainPage.getLoginButton().getText());
     }
+
+    @Test(enabled = true)
+    public void enterUsingRegisteredGoogleAccount() throws InterruptedException {
+        clickLogin();
+
+        //switch to uLogin iframe
+        switchToULoginIFrame();
+
+        //Save window handler for developerslfe.ru page
+        String windowHandleBefore = webDriver.getWindowHandle();
+
+        //click google button
+        loginPage.getGoogleButton().click();
+
+        //switch to google Authentication window
+        switchToNewOpenedWindow();
+
+        //Enter email
+        googleAuthenticationPage.getInputEmailField().click();
+        googleAuthenticationPage.getInputEmailField().sendKeys("registerdseleniumtest@gmail.com");
+
+        //Enter password
+        googleAuthenticationPage.getPasswordField().click();
+        googleAuthenticationPage.getPasswordField().sendKeys("DLSeleniumTest");
+
+        //Click sign in button
+        googleAuthenticationPage.getSignInButton().click();
+
+        //Switch back to developerslfe.ru page
+        webDriver.switchTo().window(windowHandleBefore);
+
+        //Check that you logged on with correct profile name.
+        wait.until(ExpectedConditions.textToBePresentInElement(mainPage.getProfileLink(), "RegSelenium"));
+        Assert.assertEquals("Wrong profile name", "RegSelenium", mainPage.getProfileLink().getText());
+
+        mainPage.getExit().click();
+        wait.until(ExpectedConditions.visibilityOf(mainPage.getLoginButton()));
+        Assert.assertEquals("Вход", mainPage.getLoginButton().getText());
+    }
+
+
 
 }

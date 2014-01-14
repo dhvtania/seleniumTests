@@ -6,7 +6,7 @@ import java.util.Properties;
 /*
  * Class that extracts properties from the prop file.
  * 
- * @author Sebastiano Armeli-Battana
+ *
  */
 public class PropertyLoader {
 

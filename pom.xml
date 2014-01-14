@@ -59,7 +59,7 @@
 			<id>chrome</id>
 			<properties>
 				<env>local</env>
-				<site.url>http://developerslife.ru</site.url>
+				<site.url>http://beta.add-company.ru/</site.url>
 				<browser.name>chrome</browser.name>
 			</properties>
 			<activation>

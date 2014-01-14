@@ -67,10 +67,49 @@ public class LoginPage extends Page {
     public WebElement getCaptchaInputField() { return submitButton; }
 
 
+    @FindBy(how = How.CSS, using = "iframe[id*='easyXDM_default']")
+    private WebElement uLoginIFrame;
+
+    public WebElement getULoginIFrame() {
+        return uLoginIFrame;
+    }
+
+    @FindBy(how = How.CSS, using = "#simplemodal-container #nicknameForm .modalCloseImg")
+    private WebElement closeButton;
+
+    public WebElement getCloseButton() {
+        return closeButton;
+    }
+
     @FindBy(how = How.CSS, using = "#google")
     private WebElement googleButton;
 
     public WebElement getGoogleButton() {
         return googleButton;
     }
+
+
+    @FindBy(how = How.CSS, using = "#vkontakte")
+    private WebElement vKButton;
+
+    public WebElement getVKButton() {
+        return googleButton;
+    }
+
+
+    @FindBy(how = How.CSS, using = "#twitter")
+    private WebElement twitterButton;
+
+    public WebElement getTwitterButton() {
+        return twitterButton;
+    }
+
+
+    @FindBy(how = How.CSS, using = "#facebook")
+    private WebElement facebookButton;
+
+    public WebElement getFacebookButton() {
+        return facebookButton;
+    }
+
 }

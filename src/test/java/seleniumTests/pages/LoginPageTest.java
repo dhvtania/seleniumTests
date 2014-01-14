@@ -20,7 +20,6 @@ public class LoginPageTest extends LoginPageTestBase  {
         webDriver.get(websiteUrl);
         mainPage = PageFactory.initElements(webDriver, MainPage.class);
         loginPage = PageFactory.initElements(webDriver, LoginPage.class);
-        googleAuthenticationPage = PageFactory.initElements(webDriver, GoogleAuthenticationPage.class);
     }
 
 

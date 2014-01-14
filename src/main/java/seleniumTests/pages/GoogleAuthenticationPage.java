@@ -17,7 +17,7 @@ public class GoogleAuthenticationPage extends Page {
     @FindBy(how = How.ID, using = "Email")
     private WebElement emailField;
 
-    public WebElement getInputEmailField() {
+    public WebElement getEmailField() {
         return emailField;
     }
 

@@ -10,6 +10,7 @@ public class LoginPageTestBase extends TestBase {
     MainPage mainPage;
     LoginPage loginPage;
     GoogleAuthenticationPage googleAuthenticationPage;
+    TwitterAuthenticationPage twitterAuthenticationPage;
     protected final CharSequence wrongRegExpNickNameShort = "ab";
     protected final CharSequence wrongRegExpNickNameSymbol = "\\asdf";
     protected final CharSequence password = "test";

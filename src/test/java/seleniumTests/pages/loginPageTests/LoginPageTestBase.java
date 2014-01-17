@@ -36,13 +36,11 @@ public class LoginPageTestBase extends TestBase {
 
     protected void enterPasswordAgain(CharSequence password) {
         loginPage.getPasswordAgain().click();
-        loginPage.getNickName().clear();
         loginPage.getPasswordAgain().sendKeys(password);
     }
 
     protected void enterPassword(CharSequence password) {
         loginPage.getPassword().click();
-        loginPage.getNickName().clear();
         loginPage.getPassword().sendKeys(password);
         //check that againPassword field has correct color
         Assert.assertEquals("Wrong password again color", "rgba(255, 28, 8, 0.317647)", loginPage.getPasswordAgain().getCssValue("background-color"));

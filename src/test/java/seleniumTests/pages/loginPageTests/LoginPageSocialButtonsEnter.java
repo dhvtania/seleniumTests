@@ -4,6 +4,7 @@ import junit.framework.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import seleniumTests.pages.MainPage;
@@ -26,6 +27,11 @@ public class LoginPageSocialButtonsEnter extends LoginPageTestBase {
         loginPage = PageFactory.initElements(webDriver, LoginPage.class);
         twitterAuthenticationPage = PageFactory.initElements(webDriver, TwitterAuthenticationPage.class);
         googleAuthenticationPage = PageFactory.initElements(webDriver, GoogleAuthenticationPage.class);
+    }
+
+    @AfterClass
+    public void closeBrowserWindow(){
+        webDriver.close();
     }
 
     @Test(enabled = true)

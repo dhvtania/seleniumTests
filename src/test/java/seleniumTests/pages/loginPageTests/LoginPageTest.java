@@ -3,6 +3,7 @@ package seleniumTests.pages.loginPageTests;
 import junit.framework.Assert;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import seleniumTests.pages.MainPage;
@@ -21,6 +22,11 @@ public class LoginPageTest extends LoginPageTestBase  {
         webDriver.get(websiteUrl);
         mainPage = PageFactory.initElements(webDriver, MainPage.class);
         loginPage = PageFactory.initElements(webDriver, LoginPage.class);
+    }
+
+    @AfterClass
+    public void closeBrowserWindow(){
+        webDriver.close();
     }
 
 

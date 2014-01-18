@@ -4,6 +4,7 @@ import junit.framework.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import seleniumTests.pages.MainPage;
 import seleniumTests.pages.TestBase;
+import seleniumTests.pages.loginPages.FacebookAuthenticationPage;
 import seleniumTests.pages.loginPages.GoogleAuthenticationPage;
 import seleniumTests.pages.loginPages.LoginPage;
 import seleniumTests.pages.loginPages.TwitterAuthenticationPage;
@@ -16,6 +17,7 @@ public class LoginPageTestBase extends TestBase {
     LoginPage loginPage;
     GoogleAuthenticationPage googleAuthenticationPage;
     TwitterAuthenticationPage twitterAuthenticationPage;
+    FacebookAuthenticationPage facebookAuthenticationPage;
     protected final CharSequence wrongRegExpNickNameShort = "ab";
     protected final CharSequence wrongRegExpNickNameSymbol = "\\asdf";
     protected final CharSequence password = "test";

@@ -107,7 +107,7 @@ public class LoginPageSocialButtonsAuthenticationTest extends LoginPageTestBase 
         wait.until(ExpectedConditions.textToBePresentInElement(loginPage.getLoginInfo(),"Этот никнейм уже занят.\n" +
                 "Выберите другой"));
 
-        loginPage.getCloseButton().click();
+        loginPage.getCloseButtonSocialRegistration().click();
 
         Assert.assertEquals("Вход", mainPage.getLoginButton().getText());
         refreshPage();
@@ -185,7 +185,7 @@ public class LoginPageSocialButtonsAuthenticationTest extends LoginPageTestBase 
         wait.until(ExpectedConditions.textToBePresentInElement(loginPage.getLoginInfo(),"Этот никнейм уже занят.\n" +
                 "Выберите другой"));
 
-        loginPage.getCloseButton().click();
+        loginPage.getCloseButtonSocialRegistration().click();
 
         Assert.assertEquals("Вход", mainPage.getLoginButton().getText());
         refreshPage();
@@ -262,7 +262,7 @@ public class LoginPageSocialButtonsAuthenticationTest extends LoginPageTestBase 
         wait.until(ExpectedConditions.textToBePresentInElement(loginPage.getLoginInfo(),"Этот никнейм уже занят.\n" +
                 "Выберите другой"));
 
-        loginPage.getCloseButton().click();
+        loginPage.getCloseButtonSocialRegistration().click();
 
         Assert.assertEquals("Вход", mainPage.getLoginButton().getText());
         refreshPage();

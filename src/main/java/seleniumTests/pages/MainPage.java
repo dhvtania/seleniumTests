@@ -65,5 +65,55 @@ public class MainPage extends Page {
         return exit;
     }
 
+    @FindBy(how = How.CSS, using = "ul li a[href='/latest/0']")
+    private WebElement latest;
+
+    public WebElement getLatest() {
+        return latest;
+    }
+
+    @FindBy(how = How.CSS, using = "ul li a[href='/daily/0']")
+    private WebElement top;
+
+    public WebElement getTop() {
+        return top;
+    }
+
+    @FindBy(how = How.CSS, using = "ul li a[href='/hot/0']")
+    private WebElement hot;
+
+    public WebElement getHot() {
+        return hot;
+    }
+
+    @FindBy(how = How.CSS, using = "ul li a[href='/random']")
+    private WebElement randomizer;
+
+    public WebElement getRandomizer() {
+        return randomizer;
+    }
+
+    @FindBy(how = How.CSS, using = "ul li a[href='/upload']")
+    private WebElement upload;
+
+    public WebElement getUpload() {
+        return upload;
+    }
+
+
+    @FindBy(how = How.CSS, using = "h3.comment.pageTitle")
+    private WebElement hThreeCommentPageTitle;
+
+    public WebElement getHThreeCommentPageTitle() {
+        return hThreeCommentPageTitle;
+    }
+
+    @FindBy(how = How.CSS, using = "h4.comment.pageTitle")
+    private WebElement hFourCommentPageTitle;
+
+
+    public WebElement getHFourCommentPageTitle() {
+        return hFourCommentPageTitle;
+    }
 
 }

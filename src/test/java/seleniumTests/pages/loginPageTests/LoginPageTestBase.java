@@ -4,10 +4,7 @@ import junit.framework.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import seleniumTests.pages.MainPage;
 import seleniumTests.pages.TestBase;
-import seleniumTests.pages.loginPages.FacebookAuthenticationPage;
-import seleniumTests.pages.loginPages.GoogleAuthenticationPage;
-import seleniumTests.pages.loginPages.LoginPage;
-import seleniumTests.pages.loginPages.TwitterAuthenticationPage;
+import seleniumTests.pages.loginPages.*;
 
 /**
  * Created by MikhailN on 07.01.14.
@@ -18,6 +15,7 @@ public class LoginPageTestBase extends TestBase {
     GoogleAuthenticationPage googleAuthenticationPage;
     TwitterAuthenticationPage twitterAuthenticationPage;
     FacebookAuthenticationPage facebookAuthenticationPage;
+    VKAuthenticationPage vkAuthenticationPage;
     protected final CharSequence wrongRegExpNickNameShort = "ab";
     protected final CharSequence wrongRegExpNickNameSymbol = "\\asdf";
     protected final CharSequence password = "test";

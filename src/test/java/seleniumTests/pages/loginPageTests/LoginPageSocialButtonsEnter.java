@@ -9,10 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import seleniumTests.pages.MainPage;
 import seleniumTests.pages.Page;
-import seleniumTests.pages.loginPages.FacebookAuthenticationPage;
-import seleniumTests.pages.loginPages.GoogleAuthenticationPage;
-import seleniumTests.pages.loginPages.LoginPage;
-import seleniumTests.pages.loginPages.TwitterAuthenticationPage;
+import seleniumTests.pages.loginPages.*;
 
 /**
  * Created by MikhailN on 1/15/14.
@@ -29,6 +26,7 @@ public class LoginPageSocialButtonsEnter extends LoginPageTestBase {
         twitterAuthenticationPage = PageFactory.initElements(webDriver, TwitterAuthenticationPage.class);
         googleAuthenticationPage = PageFactory.initElements(webDriver, GoogleAuthenticationPage.class);
         facebookAuthenticationPage = PageFactory.initElements(webDriver, FacebookAuthenticationPage.class);
+        vkAuthenticationPage = PageFactory.initElements(webDriver, VKAuthenticationPage.class);
     }
 
     @AfterClass
@@ -152,5 +150,45 @@ public class LoginPageSocialButtonsEnter extends LoginPageTestBase {
         wait.until(ExpectedConditions.visibilityOf(mainPage.getLoginButton()));
         Assert.assertEquals("Вход", mainPage.getLoginButton().getText());
     }
+
+    @Test(enabled = true)
+    public void enterUsingRegisteredVKAccount() throws InterruptedException {
+        clickLogin();
+
+        //switch to uLogin iframe
+        switchToULoginIFrame();
+
+        //Save window handler for developerslfe.ru page
+        String windowHandleBefore = webDriver.getWindowHandle();
+
+        //click google button
+        loginPage.getVKButton().click();
+
+        //switch to google Authentication window
+        switchToNewOpenedWindow();
+
+        //Enter email
+        vkAuthenticationPage.getEmailField().click();
+        vkAuthenticationPage.getEmailField().sendKeys("+79807707330");
+
+        //Enter password
+        vkAuthenticationPage.getPasswordField().click();
+        vkAuthenticationPage.getPasswordField().sendKeys("DLSeleniumTest");
+
+        //Click sign in button
+        vkAuthenticationPage.getSignInButton().click();
+
+        //Switch back to developerslfe.ru page
+        webDriver.switchTo().window(windowHandleBefore);
+
+        //Check that you logged on with correct profile name.
+        wait.until(ExpectedConditions.textToBePresentInElement(mainPage.getProfileLink(), "MikhailSelenium"));
+        Assert.assertEquals("Wrong profile name", "MikhailSelenium", mainPage.getProfileLink().getText());
+
+        mainPage.getExit().click();
+        wait.until(ExpectedConditions.visibilityOf(mainPage.getLoginButton()));
+        Assert.assertEquals("Вход", mainPage.getLoginButton().getText());
+    }
+
 
 }

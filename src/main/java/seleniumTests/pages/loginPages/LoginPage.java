@@ -76,11 +76,19 @@ public class LoginPage extends Page {
     }
 
     @FindBy(how = How.CSS, using = "#simplemodal-container #nicknameForm .modalCloseImg")
+    private WebElement closeButtonSocialRegistration;
+
+    public WebElement getCloseButtonSocialRegistration() {
+        return closeButtonSocialRegistration;
+    }
+
+    @FindBy(how = How.CSS, using = "a.modalCloseImg")
     private WebElement closeButton;
 
     public WebElement getCloseButton() {
         return closeButton;
     }
+
 
     @FindBy(how = How.CSS, using = "#google")
     private WebElement googleButton;
@@ -94,7 +102,7 @@ public class LoginPage extends Page {
     private WebElement vKButton;
 
     public WebElement getVKButton() {
-        return googleButton;
+        return vKButton;
     }
 
 
